@@ -1,0 +1,2 @@
+FROM erichough/nfs-server
+ADD exportfs.txt /etc/exports
