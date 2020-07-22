@@ -1,2 +1,3 @@
 FROM erichough/nfs-server
 ADD etc/exports.txt /etc/exports
+ADD etc/exports.txt /etc/exports.txt
