@@ -1,1 +1,1 @@
-/mnt/test 127.0.0.1(ro,sync)
+/tmp 127.0.0.1(ro,no_subtree_check)
