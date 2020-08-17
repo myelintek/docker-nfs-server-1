@@ -1,3 +1,4 @@
 FROM erichough/nfs-server
+COPY ./entrypoint.sh /usr/local/bin
 ADD etc/exports.txt /etc/exports
 ADD etc/exports.txt /etc/exports.txt

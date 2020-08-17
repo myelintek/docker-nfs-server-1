@@ -874,6 +874,7 @@ main() {
   init
   boot
   summarize
+  touch /mnt/exports
   hangout
 }
 
