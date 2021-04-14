@@ -20,6 +20,26 @@ stop()
   exit
 }
 
+# Check if the SHARED_DIRECTORY variable is empty
+if [ -z "${SHARED_DIRECTORY}" ]; then
+  echo "The SHARED_DIRECTORY environment variable is unset or null, exiting..."
+  exit 1
+else
+  echo "Writing SHARED_DIRECTORY to /etc/exports file"
+  /bin/sed -i "s@{{SHARED_DIRECTORY}}@${SHARED_DIRECTORY}@g" /etc/exports
+fi
+
+# Check if the PERMITTED variable is empty
+if [ -z "${PERMITTED}" ]; then
+  echo "The PERMITTED environment variable is unset or null, defaulting to '*'."
+  echo "This means any client can mount."
+  /bin/sed -i "s/{{PERMITTED}}/*/g" /etc/exports
+else
+  echo "The PERMITTED environment variable is set."
+  echo "The permitted clients are: ${PERMITTED}."
+  /bin/sed -i "s/{{PERMITTED}}/"${PERMITTED}"/g" /etc/exports
+fi
+
 # Partially set 'unofficial Bash Strict Mode' as described here: http://redsymbol.net/articles/unofficial-bash-strict-mode/
 # We don't set -e because the pidof command returns an exit code of 1 when the specified process is not found
 # We expect this at times and don't want the script to be terminated when it occurs
@@ -59,7 +79,7 @@ while true; do
       echo "Export validation failed, exiting..."
       exit 1
     fi
-    echo "Starting Mountd in the background..."These
+    echo "Starting Mountd in the background..."
     /usr/sbin/rpc.mountd --debug all --no-udp --no-nfs-version 2 --no-nfs-version 3
 # --exports-file /etc/exports
 

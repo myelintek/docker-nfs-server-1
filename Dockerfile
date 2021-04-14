@@ -10,11 +10,10 @@ RUN apk add --no-cache --update --verbose bash iproute2 nfs-utils && \
     echo "nfsd        /proc/fs/nfsd            nfsd        defaults  0  0" >> /etc/fstab
 
 EXPOSE 2049
-VOLUME ["/mnt", "/srv"]
+VOLUME ["/srv"]
 
 COPY ./nfsd.sh /usr/local/bin
-ADD etc/exports.txt /etc/exports
-ADD etc/exports.txt /etc/exports.txt
+ADD exports /etc/exports
 
 RUN chmod +x /usr/local/bin/nfsd.sh
 

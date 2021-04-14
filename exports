@@ -1,0 +1,1 @@
+{{SHARED_DIRECTORY}} {{PERMITTED}}(ro,sync,no_subtree_check,no_auth_nlm,insecure,no_root_squash,crossmnt,fsid=0)
